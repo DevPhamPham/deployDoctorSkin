@@ -1,0 +1,157 @@
+
+<style>
+    body,html{ /*/reset css*/
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: 'Syne Mono', monospace;
+    }
+
+    imagelogin::before { /*tạo lớp phủ*/
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* màu sắc của lớp phủ mờ */
+        z-index: 4;
+    }
+    .wherelogo{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 9999;
+    }
+    #side_left{
+        margin-top: 15vh;
+    }
+</style>
+
+<div class="fade-element h-100">
+  <div class="wherelogo d-flex align-items-center">
+      <a class="navbar-brand" href="/home">
+          <img src="/assets/images/logo/logo.png" width="70" height="70" class="d-inline-block align-top rounded-circle" style="object-fit: cover;" alt="logo"/>
+      </a>
+      <span class="mx-3">SkinDetective</span>
+      <span class="mx-3"><a style="text-decoration: none;font-size:130%" href="/home">Take me home</a></span>
+  </div>
+
+  <div class="container-fluid" style="height: 100%">
+      <div class="row h-100" >
+          <div id="side_left" class="col-md-6 px-5">
+              <div class="border-0 rounded p-4 box-shadow">
+                  <h2 class="text-center mb-4">Đăng nhập</h2>
+                  <form action="/auth/login" method="POST" id="user">
+                      <div class="form-group">
+                        <div id ="error-alert" style="display: none" class="alert alert-danger" role="alert">
+                        </div>
+                      </div>
+                      <div class="form-group py-2">
+                          <label for="email" class="form-label">Email</label>
+                          <input type="email" name="email" id="email" placeholder="Nhập Email" required class="form-control form-control-lg">
+                          <div class="invalid-feedback">
+                            Vui lòng nhập địa chỉ email hợp lệ.
+                          </div>
+                      </div>
+                      <div class="form-group py-2">
+                          <label for="password" class="form-label">Mật khẩu</label>
+                          <input type="password" class="form-control form-control-lg" required placeholder="Nhập mật khẩu" name="password" id="password">
+                          <div class="invalid-feedback">
+                            Vui lòng nhập mật khẩu.
+                          </div>
+                      </div>
+                      <div class="form-group py-2">
+                          <button type="submit" class="btn btn-secondary btn-block">Đăng nhập</button>
+                      </div>
+                  </form>
+                  <div class="text-center">
+                      <span>Bạn chưa có tài khoản?</span>
+                      <a class="linkControl" href="/auth/signup">Đăng ký</a>
+                      <br>
+                      <a href="" href="/forgotpassword">Quên mật khẩu?</a>
+                  </div>
+                  <div class="text-center mt-4">
+                      <hr>
+                      <span class="px-2 d-inline " style="font-family: Tahoma">HOẶC</span>
+                      <hr>
+                      <!-- Nút đăng nhập bằng Google -->
+                      <a href="/auth/google" style="font-family: Tahoma" class="btn btn-block btn-warning">Đăng nhập với Google</a>
+                      <!-- Nút đăng nhập bằng Facebook -->
+                      <a href="/auth/facebook" style="font-family: Tahoma" class="btn btn-block btn-primary">Đăng nhập bằng Facebook</a>
+                  </div>
+              </div>
+          </div>
+          <div class="px-0 col-md-6 d-flex align-items-center justify-content-center">
+              <div class="backgroundAuth imagelogin"></div>
+              <style>
+                  .backgroundAuth {
+                      background-image: url("/assets/images/home/backgroundAuth.png");
+                      height: 100%;
+                      width: 100%;
+                      background-size: cover;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      box-shadow: -5px -5px 15px #7b7b7bcc;
+                  }
+                  @media (max-width: 767px) {
+                      .backgroundAuth {
+                          position: fixed;
+                          top: 0;
+                          right: 0;
+                          z-index: -2;
+                          border-radius: 0px !important;
+                      }
+                      .backgroundAuth::before { /*tạo lớp phủ*/
+                          content: "";
+                          position: fixed;
+                          top: 0;
+                          left: 0;
+                          width: 100%;
+                          height: 100%;
+                          background-color: rgba(0, 0, 0, 0.5); /* màu sắc của lớp phủ mờ */
+                          z-index: -1;
+                      }
+                      *{
+                          color:white;
+                      }
+                      hr{
+                          background-color: white;
+                      }
+                      a.btn{
+                          color:white;
+                          border-color: white;
+                      }
+                      span{background-color: #fff0 !important;}
+                  }
+              </style>
+          </div>
+      </div>
+  </div>
+</div>
+
+{{!-- login --}}
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script>
+  $(function() {
+    $("form#user").submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: "/auth/login",
+        method: "POST",
+        data: $(this).serialize(),
+        success: function(response) {
+            console.log(response);
+          if (!response.code) {
+            $("#error-alert").text(response.message).fadeIn("fast");
+            setTimeout(function() {
+              $("#error-alert").text(response.message).fadeOut("slow");
+            },5000)
+          }else{
+            window.location.href = "/";
+          }
+        }
+      });
+    });
+  });
+</script>

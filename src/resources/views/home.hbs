@@ -1,0 +1,644 @@
+
+      {{!-- {{#if msg}}
+        <div class="alert alert-success" role="alert">
+          {{msg}}
+        </div>
+      {{/if}} --}}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/proxima-nova-2" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+  *{
+    scroll-behavior: smooth;
+    {{!-- overflow: hidden; --}}
+  }
+</style>
+
+<div class="w-100" style="position:absolute">
+  <div class="header" style="position: fixed;z-index:9999;height: 126px; width: 100%;background-color: rgb(255 255 255 / 20%);backdrop-filter: blur(5px);">
+    <div class="line" style=" border-top: 8px solid "></div>
+    <div class="container" style="height: 121px">
+      <div class="row h-100">
+
+        <div class="col-3 logo-intro h-100 text-center">
+          <div class="row h-100 d-flex align-items-center">
+            <div class="image_vector col-3 text-end">
+              <img width="42" height="39" src="./assets/images/logo/logo.png" alt="logo">
+            </div>
+            <div class="wrap_text col-9" style="text-align: left">
+              <div class="app_name" style="font-weight:700;font-size: 22px; text-align: left; font-family: 'Space Grotesk', sans-serif;">SkinDetective</div>
+              <div class="app_intro" style="font-size:14px;font-family: 'Proxima Nova', sans-serif;text-align: left">Chẩn đoán. Gợi ý. Chọn lọc</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-9 menu-bar h-100 text-center">
+
+          <div class="row h-100 d-flex align-items-center">
+            <div class="horizontal_menu col-7">
+              <ul class="d-flex flex-wrap" id="bar_menu_active" style="text-align: right">
+                <li class="mx-3"><a href="#section1" class="menu-link active" style="font-size:115%">Trang chủ</a></li>
+                <li class="mx-3"><a href="#section3" class="menu-link" style="font-size:115%">Tư vấn</a></li>
+                <li class="mx-3"><a href="#section4" class="menu-link" style="font-size:115%">Lịch sử</a></li>
+                <li class="mx-3"><a href="#section5" class="menu-link" style="font-size:115%">Tìm hiểu</a></li>
+              </ul>
+            </div>
+
+            <div class="account_navbar col-3">
+            {{#if loggedIn}}
+            <ul>
+              <li class="non_anonymous">
+                <div class="dropdown">
+                  <button class="avatar"><span style="font-family:'Space Grotesk', sans-serif; font-size:115%"> {{username}} </span><i class="fa-solid fa-chevron-down"></i></button>
+                  <div class="dropdown-content">
+                    <a href="/profile" style="font-size:115%">My Profile</a>
+                    <a href="/auth/logout" style="font-size:115%">Log Out</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            {{else}}
+              <ul>
+                <li class="anonymous"><a href="/auth" style="font-size:115%">Login</a></li>
+                <li class="anonymous"><a href="/auth/signup" style="font-size:115%">Register</a></li>
+              </ul>
+            {{/if}}
+            </div>
+
+            <div class="get_started_navbar col-2">
+              <button class="btn btn-warning py-2" style="border: 1px solid"><a href="#" style="font-weight: bold;font-size:115%">Get Started</a></button>
+            </div>
+          </div>
+<style>
+  .horizontal_menu ul,
+  .account_navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .horizontal_menu li,
+  .account_navbar li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .horizontal_menu a,
+  .account_navbar a,
+  .get_started_navbar a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .get_started_navbar {
+    text-align: right;
+  }
+
+  .horizontal_menu ul li:hover a{
+    color: darkgray;
+  }
+
+  .active{
+    color: darkgray !important;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown .avatar {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: left;
+  }
+
+  .dropdown-content a {
+    color: #000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  {{!-- .non_anonymous{
+    display: inline-block !important;
+  }
+
+  .anonymous{
+    display: none !important;
+  } --}}
+  .get_started_navbar button:hover{
+      background-color: #000;
+  }
+  .get_started_navbar button:hover a{
+    color: #ffc107;
+  }
+</style>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="page" style="height: auto;">
+    <div id="section1" class="section section1 fade-element" style="display: flex; align-items: flex-end;min-height:100vh">
+      <div class="container" style="height: auto;">
+        <div class="row h-100" >
+          <div class="col-lg-6 px-0 pb-5" style="border-radius:10px;padding-top:55px;background-color:rgba(250, 235, 215, 0)">
+            <div class="title_banner" style="padding:0 10%;font-size: 50px; text-align: left; font-family: 'Space Grotesk', sans-serif;">Chẩn đoán. Gợi ý. Chọn lọc</div>
+            <div class="intro_banner py-4" style="padding:0 10%;font-size:20px;font-family: 'Proxima Nova', sans-serif;text-align: left">Skin Detective - Trợ lý chẩn đoán và gợi ý bệnh về da cho bạn</div>
+
+            <div class="get_started py-4 border_with_padding" style="padding:0 10%;">
+              <button class="btn py-2" style="background-color:black;border: 1px solid"><a href="#" style="font-weight: bold;text-decoration: none;color: #fff;padding: 5px;">Get Started</a></button>
+              
+              <form style="display:none" id="imageInput" action="/upload" enctype="multipart/form-data" method="POST">
+                <div class="d-flex flex-wrap align-items-center justify-content-around">
+
+                  <div class="form-group">
+                    <div class="file-upload">
+                      <input type="file" id="myImage" name="myImage" accept="image/*">
+                      <label for="myImage" style="padding: 0 5px">
+                        <i class="fas fa-plus"></i> Chọn 1 ảnh về da của bạn để dự đoán
+                      </label>
+                    </div>
+                    <style>
+                      .file-upload {
+                        position: relative;
+                        display: inline-block;
+                      }
+
+                      .file-upload input[type="file"] {
+                        display: none;
+                      }
+
+                      .file-upload label {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 150px;
+                        height: 150px;
+                        border: 1px dashed #ccc;
+                        cursor: pointer;
+                      }
+
+                      .file-upload i {
+                        font-size: 24px;
+                        margin-right: 5px;
+                      }
+
+                      #previewImage {
+                        display: none;
+                        width: 150px;
+                        height: 150px;
+                      }
+                    </style>
+                  </div>
+
+                  <span><img id="previewImage" src="#" alt="Preview Image"></span>
+
+                  <div>
+                    <button type="submit" class="btn py-2" style="font-weight:bold;color:#ffffff;background-color: #40b0ef;border: 1px solid">Chẩn đoán</button>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+            <div class="component_home py-4 d-flex justify-content-around" style="padding: 0 10%">
+              <div class="component_home_child d-flex"><i style="font-size:32px" class="fa-solid fa-code-compare"></i><span style="font-size:14px;font-family: 'Proxima Nova', sans-serif;padding: 0 5%">So sánh tương đồng với các loại bệnh</span></div>
+              <div class="component_home_child d-flex"><i style="font-size:32px" class="fa-solid fa-crosshairs"></i><span style="font-size:14px;font-family: 'Proxima Nova', sans-serif;padding: 0 5%">Hỗ trợ chẩn đoán chính xác đến 73.4%</span></div>
+              <div class="component_home_child d-flex"><i style="font-size:32px" class="fa-sharp fa-square-poll-horizontal"></i><span style="font-size:14px;font-family: 'Proxima Nova', sans-serif;padding: 0 5%">Đa dạng các loại bệnh về da thường gặp</span></div>
+            </div>
+            <style>
+              .get_started button:hover{
+                background-color: #ffc107 !important;
+              }
+              .get_started button:hover a{
+                color: black !important;
+              }
+            </style>
+          </div>
+          <div class="col-lg-6" style=" position: relative;">
+              <img src="./assets/images/home/banner.png" alt="" style="position: absolute; top: 0; left: 0; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section2 fade-element" style="min-height: 100vh;position:relative">
+      <div class="curved-box"></div>
+      <hr style="color:white;opacity:1;margin:0">
+      <div class="wrap-container" style="min-height: calc(100vh - 126px); position:relative; z-index:100">
+        
+        <div class="container h-auto mb-2">
+
+          <div class="label my-5 text-center d-flex align-items-center">
+            <span style="width:auto; font-size: 30px; font-family:'Space Grotesk', sans-serif;">Kết quả chuẩn đoán cao nhất</span>
+          </div>
+
+          <div class="result my-5">
+            <span class="d-flex align-items-center justify-content-center flex-wrap" style="font-family:'Proxima Nova', sans-serif; font-size:22px; ">
+              <div class="mb-2" style="width:100%;">Kiểm tra kết quả ở đây</div>
+              {{!-- <table class="table" style="font-size:90%;font-family:'Proxima Nova', sans-serif;width:50%; border-bottom:none: #ffffff">
+                <tbody>
+                  <tr>
+                    <td style="color:black; font-weight: bold">Tên bệnh</td>
+                  </tr>
+                  <tr>
+                    <td>Thông tin</td>
+                  </tr>
+                </tbody>
+              </table> --}}
+            </span>
+            <button class="btn py-2 btn-dark" style="backdrop-filter: blur(2px);border: none"><a href="#" style="font-weight: bold;text-decoration: none;color: #fff;padding: 5px;">Bắt đầu kiểm tra</a></button>
+          </div>
+
+        </div>
+
+        <div class="container h-auto my-2">
+          <div class="label ">
+            <span style="width:100%; font-size: 30px; font-family:'Space Grotesk', sans-serif;">Gợi ý 5 bệnh liên quan<br>(từ cao đến thấp)</span>
+          </div>
+
+          <div class="result_recommence d-flex flex-wrap justify-content-around">
+          <div class="card">
+              <span style="font-size: 110%;font-weight:bold">Bệnh 1</span>
+              <div style="font-size: 18px">Mô tả 1</div>
+            </div>
+            <div class="card">
+              <span class="" style="font-size: 110%;font-weight:bold">Bệnh 2</span>
+              <div style="font-size: 18px">Mô tả 2</div>
+            </div>
+            <div class="card">
+              <span class="" style="font-size: 110%;font-weight:bold">Bệnh 3</span>
+              <div style="font-size: 18px">Mô tả 3</div>
+            </div>
+            <div class="card">
+              <span class="" style="font-size: 110%;font-weight:bold">Bệnh 4</span>
+              <div style="font-size: 18px">Mô tả 4</div>
+            </div>
+            <div class="card">
+              <span class="" style="font-size: 110%;font-weight:bold">Bệnh 5</span>
+              <div style="font-size: 18px">Mô tả 5</div>
+            </div>
+          </div>
+          <style>
+            .card {
+              display: inline-block;
+              width: 65%;
+              height: auto;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              margin: 10px;
+              padding: 10px;
+              text-align: left;
+              font-family: 'Proxima Nova', sans-serif;
+              font-size: 20px;
+              background-color: transparent;
+            }
+          </style>
+
+        </div>
+      </div>
+      <style>
+        .section2{
+          color: #000000;
+          background-image: url('./assets/images/home/background_predict2.png');
+          background-size: cover;
+          background-position: center;
+        }
+        .curved-box {
+          width: 100%;
+          height: 126px;
+          background: #fff;
+          border-radius: 0 0 0 100% ;
+        }
+        .result button:hover{
+          background-color: #42aaf0 !important;
+        }
+        .result button:hover a{
+          color: #000 !important;
+        }
+
+      </style>
+
+      <div class="wrap_nowball" style="position: absolute; top:0;left:0;height:100%;width:100%">
+
+        <div id="snowfall"></div>
+      </div>
+      <style>
+        #snowfall {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+        }
+      </style>
+    </div>
+
+    <div id="section3" class="section section3 fade-element d-flex align-items-center justify-content-center" style="height: 100vh;">
+      <div class="container text-center">
+        <h1 class="text-center my-5" style="font-family: 'Proxima Nova', sans-serif;">Đặt câu hỏi để cùng giải đáp</h1>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="chatbox card" style="text-align:left">
+              <div class="card-body" id="chatbox" style="min-height:25vh;max-height: 75vh;overflow: auto;"></div>
+            </div>
+            {{!-- <form action="/" id="test"> --}}
+              <div class="input-group mt-3">
+                <textarea id="messageInput" class="form-control" placeholder="Nhập câu hỏi của bạn..." style="resize: none; max-height: 200px; overflow-y: auto;border-radius:10px"></textarea>
+                <div class="input-group-append mx-3 d-flex align-items-center">
+                  <button class="btn btn-primary" onclick="sendMessage()">Gửi</button>
+                </div>
+              </div>
+            {{!-- </form> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 2s linear infinite;
+        display: inline-block;
+        margin-left: 5px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+
+  </div>
+
+</div>
+
+<div id="progress" style="display:none; background-color: #8585855d;position: fixed; top: 0; left: 0; right: 0;bottom:0;z-index: 9999999999;">
+  <div id="progressBar" class="d-flex align-items-center text-center"><span style="position: relative; top:60vh; width: 100vw;color: #ff0000;font-size: 38px;font-family:'Space Grotesk', sans-serif;">Đang chẩn đoán</span></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+
+{{!-- upload --}}
+    <script>
+        $(document).ready(function() {
+            $('.get_started button').click(function() {
+                $('#imageInput').fadeIn(1000);
+                $('.get_started>button').fadeOut(50);
+            });
+            $('.result button').click(function() {
+                $('#imageInput').fadeIn(1000);
+                $('.get_started>button').fadeOut(50);
+            });
+
+            $('#myImage').change(function() {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#previewImage').attr('src', e.target.result);
+                    $('#previewImage').show();
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            $("#imageInput").on("submit", function(e) {
+                var fileInput = $("#myImage").get(0); // Lấy phần tử DOM từ đối tượng jQuery
+                if (fileInput.files.length === 0) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Thất bại',
+                        text: "Vui lòng chọn một ảnh trước khi gửi.",
+                        icon: 'warning',
+                        confirmButtonText: 'Đóng'
+                    })
+                }
+            });
+
+        });
+    </script>
+
+{{!-- setup menu --}}
+<script>
+$(function() {
+  const menuItems = document.querySelectorAll('#bar_menu_active li a');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', function() {
+      // Xóa thuộc tính 'id' 'active' của tất cả các phần tử <li>
+      menuItems.forEach(item => item.classList.remove('active'));
+
+      // Thêm thuộc tính 'id' 'active' cho phần tử <li> được nhấp vào
+      this.classList.add('active');
+    });
+  });
+
+  const menuLinks = document.querySelectorAll('.menu-link');
+  const sections = document.querySelectorAll('.section');
+//console.log(sections)
+  function activateMenuLink(index) {
+    menuLinks.forEach(link => link.classList.remove('active'));
+    menuLinks[index].classList.add('active');
+  }
+
+  function setActiveMenuLink() {
+    const currentScrollPos = window.pageYOffset;
+
+    sections.forEach((section, index) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+
+      if (currentScrollPos >= sectionTop - 100 && currentScrollPos < sectionTop + sectionHeight) {
+        activateMenuLink(index);
+      }
+    });
+  }
+
+  window.addEventListener('scroll', setActiveMenuLink);
+  });
+</script>
+
+{{!-- prediction --}}
+<script>
+ $(function() {
+    $("#imageInput").submit(function(event) {
+      event.preventDefault();
+
+      // Tạo đối tượng spinner
+      var spinner = new Spinner().spin();
+      $("#progress").show()
+      $("#progressBar").append(spinner.el);
+
+      var formData = new FormData(this);
+      $.ajax({
+        url: "/upload",
+        method: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          // Ẩn spinner khi nhận được phản hồi
+          {{!-- console.log("response.status");
+          console.log(response.status); --}}
+
+          $(".result").html(`
+            <span class="d-flex align-items-center justify-content-center flex-wrap" style="font-family:'Proxima Nova', sans-serif; font-size:24px; ">
+            
+            </span>
+              <div class="py-2" style="backdrop-filter: blur(2px);border: none;font-size:18px">${response.results[0].desp}</div>
+          `)
+          $(".result span").html(`
+              <div class="mb-2" style="width:100%;font-weitght:bold">${response.results[0].name}</div>
+          `);
+          $(".result").find("button").remove();
+          let result_recommence = "";
+          for (let i = 1; i < response.results.length; i++) {
+            result_recommence += `
+            <div class="card">
+              <span class="" style="font-size: 110%;font-weight:bold">${response.results[i].name}</span>
+              <div style="font-size: 18px">${response.results[i].desp}</div>
+            </div>
+            `
+          }
+          $(".result_recommence").html(result_recommence);
+
+          $('html, body').animate({
+            scrollTop: $('.section2').offset().top
+          }, 300);
+          $("#progress").hide()
+          spinner.stop();
+        },
+        error: function(err){
+          // Ẩn spinner nếu xảy ra lỗi
+          spinner.stop();
+          {{!-- console.log("err");
+          console.log(err.status); --}}
+          if (err.status == 401)
+            window.location.href = "/auth/login";
+        }
+      });
+    
+    });
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/brands.min.js" integrity="sha512-KYlRezs7yAa59UnX6zAvY7I96Te02kycQn02Sr6FU/fBpxcXAwumRe5DHVrqVnWTt9HY/PktrAPZzSe9UE1Yxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/fontawesome.min.js" integrity="sha512-c41hNYfKMuxafVVmh5X3N/8DiGFFAV/tU2oeNk+upk/dfDAdcbx5FrjFOkFhe4MOLaKlujjkyR4Yn7vImrXjzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{!-- chatBot --}}
+<script>
+    const chatbox = document.getElementById('chatbox');
+  const messageInput = document.getElementById('messageInput');
+
+  async function sendMessage() {
+    const message = messageInput.value;
+    messageInput.value = '';
+    chatbox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+    if (message.trim() === '') {
+      chatbox.innerHTML += `<p><strong>DoctorSkin:</strong> Hãy gửi lại câu hỏi của bạn.</p>`;
+      return;
+    }
+
+    const loader = document.createElement('i');
+    loader.classList.add('fas', 'fa-spinner', 'fa-spin', 'loader');
+    document.querySelector('.input-group-append').appendChild(loader);
+
+    fetch('https://api.writesonic.com/v1/botsonic/botsonic/generate/67ae5f26-96ac-46b0-9e8d-6fbb29151365', {
+      method: 'POST',
+      headers: {
+        'Accept-Encoding': 'gzip, deflate',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'User-Agent': 'python-requests/2.28.1',
+        'accept': 'application/json',
+        'token': 'c96d4c3c-42c5-41e7-821b-b5401d05a096'
+      },
+      body: JSON.stringify({
+        'question': message,
+        'chat_history': []
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong');
+        }
+      })
+      .then(data => {
+        // Xóa biểu tượng loading
+        $(".input-group-append").find("i").remove()
+        $(".input-group-append").find("svg").remove()
+
+        // Xử lý dữ liệu phản hồi ở đây
+        // Xóa nội dung trong input
+        messageInput.value = '';
+        //console.log(data[0].data.answer);
+        chatbox.innerHTML += `<p><strong>DoctorSkin:</strong> ${data[0].data.answer}</p>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+      })
+      .catch(error => {
+        // Xóa biểu tượng loading
+        $(".input-group-append").find("i").remove()
+        $(".input-group-append").find("svg").remove()
+
+        // Xử lý lỗi ở đây
+        console.log(error);
+      });
+  }
+</script>
+
+{{!-- chatbot emb --}}
+<script>
+(function (w, d, s, o, f, js, fjs) {
+  w["botsonic_widget"] = o;
+  w[o] =
+    w[o] ||
+    function () {
+      (w[o].q = w[o].q || []).push(arguments);
+    };
+  (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
+  js.id = o;
+  js.src = f;
+  js.async = 1;
+  fjs.parentNode.insertBefore(js, fjs);
+})(window, document, "script", "DoctorSkin", "https://d1m9uqhmlogh4h.cloudfront.net/CDN/botsonic.min.js");
+DoctorSkin("init", {
+  serviceBaseUrl: "https://api.writesonic.com",
+  token: "c96d4c3c-42c5-41e7-821b-b5401d05a096",
+});
+  {{!-- $("form#test").on("submit", function(e){
+    e.preventDefault();
+  }) --}}
+</script>
