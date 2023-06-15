@@ -61,7 +61,7 @@ class PredictController {
     });
 
     try {
-      let response = await axios.post("http://localhost:5000/predict", imageData, config);
+      let response = await axios.post("https://servicedocterskin.onrender.com/predict", imageData, config);
       if (response.error) throw new Error("Error from server Flask");
       await fs.rename(sourcePath, targetPath);
       try {
